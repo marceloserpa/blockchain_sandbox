@@ -1,0 +1,29 @@
+.Card {
+    text-align: center;
+    border: 1px solid #000;
+    width: 220px;
+    padding: 10px;
+}
+
+
+.Card h3 {
+    font-size: 16px;
+    height: 30px;
+}
+
+.Card .card-picture {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.Card .card-picture:hover {
+    filter: brightness(120%);
+}
+
+.Card .price {
+    font-size: 16px;
+}
+
+.Card .btn {
+    margin-bottom: 10px;
+}
