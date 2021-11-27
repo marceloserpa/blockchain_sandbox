@@ -2,30 +2,26 @@ import React, { Component } from "react";
 import Card from './Card.js';
 
 function Store(props) {
-  return (
-    <article>
-        {renderCardList(props.userAccount, props.cards)}
-    </article>
-  );
-}
+  const account = props.userAccount;
+  const cards = props.cards;
 
-
-function renderCardList(account, cards){
-
-    const list = cards.filter(card => {
+  const list = cards.filter(card => {
         return account !== card.owner;
     }).map(card => {
         return <Card info={card} key={card.id} />
     });
 
-    return (
+  return (
+    <article>
         <div className = "container">
-        <div className="row">
-            {list}
+            <div className="row">
+                {list}
+            </div>
         </div>
-        </div>
-    );
-
+    </article>
+  );
 }
+
+
 
 export default Store;

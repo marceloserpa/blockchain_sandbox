@@ -2,30 +2,21 @@ import React, { Component } from "react";
 import Card from './Card.js';
 
 function MyCards(props) {
+
+  const account = props.userAccount;
+
+  const cards = props.cards.filter(card => account === card.owner)
+        .map(card => <Card info={card} key={card.id} />);
+
   return (
     <article>
-        {renderCardList(props.userAccount, props.cards)}
+        <div className = "container">
+            <div className="row">
+                {cards}
+            </div>
+        </div>
     </article>
   );
-}
-
-
-function renderCardList(account, cards){
-
-    const list = cards.filter(card => {
-        return account === card.owner;
-    }).map(card => {
-        return <Card info={card} key={card.id} />
-    });
-
-    return (
-        <div className = "container">
-        <div className="row">
-            {list}
-        </div>
-        </div>
-    );
-
 }
 
 export default MyCards;
