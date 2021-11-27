@@ -69,7 +69,7 @@ class App extends Component {
       ];
 
       if(testCards.length != this.state.cardCount ){
-        console.log('generate data in blockchain')
+        console.log('Generate data in blockchain')
         let index = this.state.cardCount;
 
         for(var i=index; i < testCards.length;i++){
@@ -86,16 +86,15 @@ class App extends Component {
         }
 
       } else {
-
-        
-        
-      const cards = [];  
-      for (var i = 1; i <= this.state.cardCount; i++) {
-        const card = await tradeCardContract.methods.cards(i).call()
-        cards[i] = card;       
+        console.log('Load data from blockchain')
+        const cards = [];  
+        for (var i = 1; i <= this.state.cardCount; i++) {
+          const card = await tradeCardContract.methods.cards(i).call()
+          cards[i] = card; 
+          cards[i].price = web3.utils.fromWei(card.price, "ether")      
+        }
+        this.setState({ cards })
       }
-      this.setState({ cards })
-    }
 
 
     } catch (error) {
