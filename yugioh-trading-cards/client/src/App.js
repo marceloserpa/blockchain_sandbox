@@ -27,9 +27,8 @@ class App extends Component {
       tradeCardContract: null 
     };
 
+    this.enableCardForSale = this.enableCardForSale.bind(this)
   }
-
-
 
   componentDidMount = async () => {
 
@@ -113,6 +112,14 @@ class App extends Component {
     
   };
 
+  enableCardForSale(id) {
+    console.log('Put card to sale ' + id)
+    this.setState({ loading: true })
+    this.state.tradeCardContract.methods.enableCardForSale(id).send({ from: this.state.account })
+    .once('receipt', (receipt) => {
+      this.setState({ loading: false })
+    })
+  }
 
   render(){
     return (
@@ -124,7 +131,11 @@ class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/mycards" element={<MyCards cards={this.state.cards} userAccount={this.state.account}/>} />
+            <Route path="/mycards"
+                   element={<MyCards cards={this.state.cards} 
+                   userAccount={this.state.account}
+                   enableCardForSale={this.enableCardForSale} />} />
+
             <Route path="/store" element={<Store cards={this.state.cards} userAccount={this.state.account} />} />
             
           </Routes>

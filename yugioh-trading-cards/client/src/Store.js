@@ -17,7 +17,7 @@ export class Store extends Component {
         const list = cards.filter(card => {
               return account !== card.owner && card.forSale;
           }).map(card => {
-              return <Card info={card} key={card.id} />
+              return <Card info={card} key={card.id} renderButton={"buy"} />
           });
       
         return (

@@ -15,13 +15,23 @@ export class Card extends Component {
           <img src={this.props.info.picture} className="card-picture" />
           <p className="owner">owner: {this.props.info.owner}</p>
           <p className="price">price: Ether {this.props.info.price}</p>
-  
-          { this.props.info.forSale && 
-            <button className="btn btn-primary">Buy #ID {this.props.info.id}</button>
+
+          {  this.props.renderButton === "buy" &&
+            <button className="btn btn-primary">Buy </button>
           }
           
-          { !this.props.info.forSale && 
-            <button className="btn btn-primary">Sell #ID {this.props.info.id}</button>
+          {  this.props.renderButton === "sell" && 
+            <button 
+              className="btn btn-primary"
+              name={this.props.info.id}
+              value={this.props.info.id}
+              onClick={(event) => {
+                this.props.enableCardForSale(event.target.value)
+              }} >Sell</button>
+          }
+
+          {  this.props.renderButton === "cancel-sale" &&
+            <button className="btn btn-primary">Remove from sale </button>
           }
       </div>
     );

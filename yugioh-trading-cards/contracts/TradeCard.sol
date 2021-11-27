@@ -27,7 +27,7 @@ contract TradeCard {
         string picture,
         uint price,
         address payable owner,
-        bool purchased
+        bool forSale
     );
 
     function createCard(string memory _name, string memory _picture, uint _price) public {
@@ -42,6 +42,25 @@ contract TradeCard {
         // Trigger an event
         emit CardCreated(cardCount, _name, _picture,_price, msg.sender, false);
     }
+
+
+    event CardEnableForSale(
+        uint id
+    );
+
+    function enableCardForSale(uint _id) public {
+        require(_id <= cardCount);
+
+        Card storage card = cards[_id];
+        require(card.owner == msg.sender);
+
+        card.forSale = true;
+        
+       // cards[_id] = card;
+     
+        emit CardEnableForSale(_id);
+    }
+
 
 
 }

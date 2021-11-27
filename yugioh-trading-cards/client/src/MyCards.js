@@ -11,7 +11,13 @@ export class MyCards extends Component {
     render() {
         const userAccount = this.props.userAccount;
         const cards = this.props.cards.filter(card => userAccount === card.owner)
-              .map(card => <Card info={card} key={card.id} />);
+              .map(card => {
+                    console.log(card    )
+                return <Card info={card} 
+                enableCardForSale={this.props.enableCardForSale} 
+                renderButton={card.forSale ? "cancel-sale" : "sell"}
+                key={card.id} />
+              });
       
         return (
           <article>
