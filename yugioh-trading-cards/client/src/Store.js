@@ -1,27 +1,35 @@
 import React, { Component } from "react";
-import Card from './Card.js';
+import { Card } from './Card.js';
 
-function Store(props) {
-  const account = props.userAccount;
-  const cards = props.cards;
 
-  const list = cards.filter(card => {
-        return account !== card.owner;
-    }).map(card => {
-        return <Card info={card} key={card.id} />
-    });
 
-  return (
-    <article>
-        <div className = "container">
-            <div className="row">
-                {list}
-            </div>
-        </div>
-    </article>
-  );
+export class Store extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+
+    render(){
+        const account = this.props.userAccount;
+        const cards = this.props.cards;
+      
+        const list = cards.filter(card => {
+              return account !== card.owner;
+          }).map(card => {
+              return <Card info={card} key={card.id} />
+          });
+      
+        return (
+          <article>
+              <div className = "container">
+                  <div className="row">
+                      {list}
+                  </div>
+              </div>
+          </article>
+        );
+    }
+
 }
 
-
-
-export default Store;

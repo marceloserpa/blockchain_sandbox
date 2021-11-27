@@ -13,12 +13,12 @@ import {
 import './App.css';
 import './Card.js';
 import './NavBar.js';
-import Home from './Home.js';
-import MyCards from './MyCards.js';
-import Store from './Store.js';
+import { Home } from './Home.js';
+import { MyCards } from './MyCards.js';
+import { Store } from './Store.js';
 
-import Card from './Card.js';
-import NavBar from './NavBar.js';
+import { Card } from './Card.js';
+import { NavBar } from './NavBar.js';
 
 class App extends Component {
 
