@@ -48,6 +48,11 @@ contract TradeCard {
         uint id
     );
 
+
+    event CardDisabledForSale(
+        uint id
+    );
+
     function enableCardForSale(uint _id) public {
         require(_id <= cardCount);
 
@@ -55,10 +60,20 @@ contract TradeCard {
         require(card.owner == msg.sender);
 
         card.forSale = true;
-        
-       // cards[_id] = card;
      
         emit CardEnableForSale(_id);
+    }
+
+
+    function removeCardForSale(uint _id) public {
+        require(_id <= cardCount);
+
+        Card storage card = cards[_id];
+        require(card.owner == msg.sender);
+
+        card.forSale = false;
+     
+        emit CardDisabledForSale(_id);
     }
 
 

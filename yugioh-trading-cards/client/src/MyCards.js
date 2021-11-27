@@ -15,6 +15,7 @@ export class MyCards extends Component {
                     console.log(card    )
                 return <Card info={card} 
                 enableCardForSale={this.props.enableCardForSale} 
+                disableCardForSale={this.props.disableCardForSale} 
                 renderButton={card.forSale ? "cancel-sale" : "sell"}
                 key={card.id} />
               });

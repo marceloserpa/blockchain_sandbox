@@ -31,7 +31,11 @@ export class Card extends Component {
           }
 
           {  this.props.renderButton === "cancel-sale" &&
-            <button className="btn btn-primary">Remove from sale </button>
+            <button className="btn btn-primary" 
+              value={this.props.info.id}
+              onClick={(event) => {
+                this.props.disableCardForSale(event.target.value)
+              }}>Remove from sale </button>
           }
       </div>
     );
