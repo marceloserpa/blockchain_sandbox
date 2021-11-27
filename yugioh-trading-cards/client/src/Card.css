@@ -24,6 +24,11 @@
     font-size: 16px;
 }
 
+.Card .owner {
+    font-size: 12px;
+    overflow-wrap: break-word;
+}
+
 .Card .btn {
     margin-bottom: 10px;
 }

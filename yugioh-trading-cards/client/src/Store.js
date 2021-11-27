@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from './Card.js';
 
-function MyCards(props) {
+function Store(props) {
   return (
     <article>
         {renderCardList(props.userAccount, props.cards)}
@@ -13,7 +13,7 @@ function MyCards(props) {
 function renderCardList(account, cards){
 
     const list = cards.filter(card => {
-        return account === card.owner;
+        return account !== card.owner;
     }).map(card => {
         return <Card info={card} key={card.id} />
     });
@@ -28,4 +28,4 @@ function renderCardList(account, cards){
 
 }
 
-export default MyCards;
+export default Store;

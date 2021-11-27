@@ -15,6 +15,7 @@ import './Card.js';
 import './NavBar.js';
 import Home from './Home.js';
 import MyCards from './MyCards.js';
+import Store from './Store.js';
 
 import Card from './Card.js';
 import NavBar from './NavBar.js';
@@ -145,7 +146,8 @@ class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/mycards" element={<MyCards cards={this.state.cards}/>} />
+            <Route path="/mycards" element={<MyCards cards={this.state.cards} userAccount={this.state.account}/>} />
+            <Route path="/store" element={<Store cards={this.state.cards} userAccount={this.state.account} />} />
             
           </Routes>
       </BrowserRouter>
