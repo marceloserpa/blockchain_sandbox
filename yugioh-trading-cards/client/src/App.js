@@ -1,23 +1,18 @@
 import React, { Component } from "react";
-import TradeCardContract from "./contracts/TradeCard.json";
-import getWeb3 from './getWeb3';
-
-
 import {
   BrowserRouter,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import './App.css';
-import './Card.js';
-import './NavBar.js';
+
+import TradeCardContract from "./contracts/TradeCard.json";
+import getWeb3 from './getWeb3';
+
 import { Home } from './Home.js';
 import { MyCards } from './MyCards.js';
 import { Store } from './Store.js';
-
-import { Card } from './Card.js';
 import { NavBar } from './NavBar.js';
 
 class App extends Component {
@@ -118,23 +113,6 @@ class App extends Component {
     
   };
 
-
-  renderCardList(cards){
-
-    const list = cards.map(card => {
-      return <Card info={card} key={card.id} />
-    });
-
-
-    return (
-      <div className = "container">
-        <div className="row">
-          {list}
-        </div>
-      </div>
-    );
-
-  }
 
   render(){
     return (

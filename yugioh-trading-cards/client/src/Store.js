@@ -15,7 +15,7 @@ export class Store extends Component {
         const cards = this.props.cards;
       
         const list = cards.filter(card => {
-              return account !== card.owner;
+              return account !== card.owner && card.forSale;
           }).map(card => {
               return <Card info={card} key={card.id} />
           });
