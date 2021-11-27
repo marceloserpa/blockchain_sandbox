@@ -2,9 +2,19 @@ import React, { Component } from "react";
 import TradeCardContract from "./contracts/TradeCard.json";
 import getWeb3 from './getWeb3';
 
+
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
 import './App.css';
 import './Card.js';
-import './NavBar.js'
+import './NavBar.js';
+import Home from './Home.js';
+import MyCards from './MyCards.js';
 
 import Card from './Card.js';
 import NavBar from './NavBar.js';
@@ -131,17 +141,18 @@ class App extends Component {
         <header className="App-header">
           <NavBar />
         </header>
-        <article>
-          {this.renderCardList(this.state.cards)}
-        </article>
-      </div>
-      
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/mycards" element={<MyCards cards={this.state.cards}/>} />
+            
+          </Routes>
+      </BrowserRouter>
+    </div>
+
     );
   }
-
-
-
-
 }
 
 export default App;
