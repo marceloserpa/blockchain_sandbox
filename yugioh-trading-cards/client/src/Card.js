@@ -17,7 +17,12 @@ export class Card extends Component {
           <p className="price">price: Ether {this.props.info.price}</p>
 
           {  this.props.renderButton === "buy" &&
-            <button className="btn btn-primary">Buy </button>
+            <button className="btn btn-primary"
+                    name={this.props.info.id}
+                    value={this.props.info.price}
+                    onClick={(event) => {
+                      this.props.purchaseCard(event.target.name, event.target.value)
+                    }} >Buy </button>
           }
           
           {  this.props.renderButton === "sell" && 

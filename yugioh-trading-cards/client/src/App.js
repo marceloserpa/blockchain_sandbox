@@ -29,6 +29,7 @@ class App extends Component {
 
     this.enableCardForSale = this.enableCardForSale.bind(this)
     this.disableCardForSale = this.disableCardForSale.bind(this)
+    this.purchaseCard = this.purchaseCard.bind(this)
   }
 
   componentDidMount = async () => {
@@ -60,8 +61,8 @@ class App extends Component {
       console.log(this.state.cardCount)
       
       const testCards = [
-        {id: 1, name: 'Dark Armed Dragon SDDC-EN012', picture: '/images/22078.jpg', price: 0.00082},
-        {id: 2, name: 'Blue-Eyes White Dragon', picture: '/images/2184.jpg', price: 0.00166286},
+        {id: 1, name: 'Dark Armed Dragon SDDC-EN012', picture: '/images/22078.jpg', price: 1.05}, // price: 0.00082
+        {id: 2, name: 'Blue-Eyes White Dragon', picture: '/images/2184.jpg', price: 3.1}, //  price: 0.00166286
         {id: 3, name: 'Trishula, Dragon of the Ice Barrier BLVO-EN100', picture: '/images/61532.jpg', price: 0.18712400},
         {id: 4, name: 'Black Luster Soldier - Soldier of Chaos', picture: '/images/53863.jpg', price: 0.08337185827213461},
         {id: 5, name: 'Level Up! SS05-ENB22', picture: '/images/61036.jpg', price: 0.04168386143145479},
@@ -130,7 +131,17 @@ class App extends Component {
       this.setState({ loading: false })
     })
   }
+ 
+  purchaseCard(id, price) {
+    console.log('purchase card ' + id)
+    this.setState({ loading: true })
 
+    const weiPrice = this.state.web3.utils.toWei(price, 'ether')
+    this.state.tradeCardContract.methods.purchaseCard(id).send({ from: this.state.account, value: weiPrice })
+    .once('receipt', (receipt) => {
+      this.setState({ loading: false })
+    })
+  }
 
   render(){
     return (
@@ -148,7 +159,10 @@ class App extends Component {
                    enableCardForSale={this.enableCardForSale}
                    disableCardForSale={this.disableCardForSale} />} />
 
-            <Route path="/store" element={<Store cards={this.state.cards} userAccount={this.state.account} />} />
+            <Route path="/store" 
+                  element={<Store cards={this.state.cards} 
+                  userAccount={this.state.account}
+                  purchaseCard={this.purchaseCard} />} />
             
           </Routes>
       </BrowserRouter>

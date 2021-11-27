@@ -31,15 +31,12 @@ contract TradeCard {
     );
 
     function createCard(string memory _name, string memory _picture, uint _price) public {
-        // Require a valid name
         require(bytes(_name).length > 0);
-        // Require a valid price
         require(_price > 0);
-        // Increment card count
+
         cardCount ++;
-        // Create the card
         cards[cardCount] = Card(cardCount, _name, _picture, _price, msg.sender, false);
-        // Trigger an event
+
         emit CardCreated(cardCount, _name, _picture,_price, msg.sender, false);
     }
 
@@ -76,6 +73,26 @@ contract TradeCard {
         emit CardDisabledForSale(_id);
     }
 
+    event CardPurchased(
+        uint id
+    );
+
+    function purchaseCard(uint _id) public payable {
+        require(_id <= cardCount);
+
+        Card storage card = cards[_id];
+        require(card.owner != msg.sender);
+
+        require(card.forSale == true);
+        card.forSale = false;
+
+        (bool success, ) = card.owner.call.value(msg.value)("");
+        require(success, "Transfer failed.");
+        
+        card.owner = msg.sender;
+
+        emit CardPurchased(_id);
+    }
 
 
 }
