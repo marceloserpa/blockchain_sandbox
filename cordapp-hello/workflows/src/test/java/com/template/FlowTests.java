@@ -1,7 +1,7 @@
 package com.template;
 
 import com.google.common.collect.ImmutableList;
-import com.template.flows.TemplateFlow;
+import com.template.flows.IOUFlow;
 import com.template.states.IOUState;
 import net.corda.core.identity.CordaX500Name;
 import net.corda.core.node.services.Vault;
@@ -37,7 +37,7 @@ public class FlowTests {
 
     @Test
     public void dummyTest() {
-        TemplateFlow.TemplateFlowInitiator flow = new TemplateFlow.TemplateFlowInitiator(b.getInfo().getLegalIdentities().get(0));
+        IOUFlow.TemplateFlowInitiator flow = new IOUFlow.TemplateFlowInitiator(b.getInfo().getLegalIdentities().get(0));
         Future<SignedTransaction> future = a.startFlow(flow);
         network.runNetwork();
 

@@ -22,6 +22,7 @@ public class TemplateContract implements Contract {
         /* We can use the requireSingleCommand function to extract command data from transaction.
          * However, it is possible to have multiple commands in a signle transaction.*/
         //final CommandWithParties<Commands> command = requireSingleCommand(tx.getCommands(), Commands.class);
+        /**
         final CommandData commandData = tx.getCommands().get(0).getValue();
 
         if (commandData instanceof Commands.Send) {
@@ -35,6 +36,7 @@ public class TemplateContract implements Contract {
                 return null;
             });
         }
+         ***/
     }
 
     // Used to indicate the transaction's intent.
