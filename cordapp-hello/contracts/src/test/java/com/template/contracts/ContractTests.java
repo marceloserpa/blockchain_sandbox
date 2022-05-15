@@ -21,14 +21,14 @@ public class ContractTests {
         IOUState state = new IOUState("Hello-World",alice.getParty(),bob.getParty());
         ledger(ledgerServices, l -> {
             l.transaction(tx -> {
-                tx.input(TemplateContract.ID, state);
-                tx.output(TemplateContract.ID, state);
-                tx.command(alice.getPublicKey(), new TemplateContract.Commands.Send());
+                tx.input(IOUContract.ID, state);
+                tx.output(IOUContract.ID, state);
+                tx.command(alice.getPublicKey(), new IOUContract.Commands.Send());
                 return tx.fails(); //fails because of having inputs
             });
             l.transaction(tx -> {
-                tx.output(TemplateContract.ID, state);
-                tx.command(alice.getPublicKey(), new TemplateContract.Commands.Send());
+                tx.output(IOUContract.ID, state);
+                tx.command(alice.getPublicKey(), new IOUContract.Commands.Send());
                 return tx.verifies();
             });
             return null;
